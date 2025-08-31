@@ -47,7 +47,7 @@ const signin = async () => {
     alert(`登入成功`)
     router.push('/mylist')
   } catch (error) {
-    alert(`${error.response.data.message}`)
+    alert(`登入失敗: ${error.response.data.message}`)
     router.push('/')
   }
 }

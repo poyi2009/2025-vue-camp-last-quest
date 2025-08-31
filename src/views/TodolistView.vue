@@ -41,7 +41,7 @@ const fetchUserData = async () => {
       router.push('/')
     }
   } catch (error) {
-    alert(`${error.response.data.message}`)
+    alert(`驗證失敗: ${error.response.data.message}`)
   }
 }
 //待完成數量
@@ -66,7 +66,7 @@ const signout = async () => {
     alert(`${res.data.message}`)
     await fetchUserData()
   } catch (error) {
-    alert(`${error.response.data.message}`)
+    alert(`登出失敗: ${error.response.data.message}`)
   }
 }
 //新增todo
@@ -87,7 +87,7 @@ const addTodo = async () => {
     alert(`${res.data.newTodo.content} 新增待辦成功`)
     await getTodos()
   } catch (error) {
-    alert(`${error.response.data.message}`)
+    alert(`新增清單失敗: ${error.response.data.message}`)
   }
 }
 //讀取todo
@@ -107,7 +107,7 @@ const getTodos = async () => {
     })
     todos.value = todosResult
   } catch (error) {
-    alert(`${error.response.data.message}`)
+    alert(`讀取清單失敗: ${error.response.data.message}`)
   }
 }
 //切換待辦狀態
@@ -125,7 +125,7 @@ const changeTodoStatus = async (id) => {
     alert(`${res.data.message}`)
     await getTodos()
   } catch (error) {
-    alert(`${error.response.data.message}`)
+    alert(`更新清單狀態失敗: ${error.response.data.message}`)
   }
 }
 //儲存更新清單
@@ -147,7 +147,7 @@ const saveTodo = async (id) => {
     alert(`${res.data.message}`)
     await getTodos()
   } catch (error) {
-    alert(`${error.response.data.message}`)
+    alert(`儲存清單失敗: ${error.response.data.message}`)
   }
 }
 //刪除待辦
@@ -161,7 +161,7 @@ const deleteTodo = async (id) => {
     alert(res.data.message)
     await getTodos()
   } catch (error) {
-    alert(`${error.response.data.message}`)
+    alert(`刪除清單失敗: ${error.response.data.message}`)
   }
 }
 //篩選待辦

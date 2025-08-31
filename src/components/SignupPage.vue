@@ -66,7 +66,7 @@ const signup = async () => {
     comparePassword.value = ''
     changeHomeStatus()
   } catch (error) {
-    alert(`${error.response.data.message}`)
+    alert(`註冊失敗: ${error.response.data.message}`)
   }
 }
 </script>
@@ -103,17 +103,19 @@ const signup = async () => {
         id="pwd"
         placeholder="請輸入密碼"
         required
+        autocomplete="new-password"
         v-model="password"
       />
       <span v-if="errors.password">{{ errors.password }}</span>
-      <label class="formControls_label" for="pwd">再次輸入密碼</label>
+      <label class="formControls_label" for="checkpwd">再次輸入密碼</label>
       <input
         class="formControls_input"
         type="password"
-        name="pwd"
-        id="pwd"
+        name="checkpwd"
+        id="checkpwd"
         placeholder="請再次輸入密碼"
         required
+        autocomplete="new-password"
         v-model="comparePassword"
       />
       <span v-if="errors.comparePassword">{{ errors.comparePassword }}</span>

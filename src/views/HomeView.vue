@@ -28,7 +28,7 @@ const changeHomeStatus = () => {
         <SigninPage @change-home-status="changeHomeStatus" />
       </div>
       <div v-else>
-        <SignupPage :homeStatus="homeStatus" @change-home-status="changeHomeStatus" />
+        <SignupPage @change-home-status="changeHomeStatus" />
       </div>
     </div>
   </div>
