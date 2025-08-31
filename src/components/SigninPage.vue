@@ -78,13 +78,7 @@ const signin = async () => {
         v-model="password"
       />
       <span v-if="errors.password">{{ errors.password }}</span>
-      <input
-        class="formControls_btnSubmit"
-        type="button"
-        onclick="javascript:location.href='#todoListPage'"
-        value="登入"
-        @click="signin"
-      />
+      <input class="formControls_btnSubmit" type="button" value="登入" @click="signin" />
       <a href="" @click.prevent="changeHomeStatus" class="formControls_btnLink">註冊帳號</a>
     </form>
   </div>

@@ -16,7 +16,7 @@ const changeHomeStatus = () => {
           ><img
             class="logoImg"
             src="https://raw.githubusercontent.com/hexschool/2022-web-layout-training/main/todolist/logo.png"
-            alt=""
+            alt="logoImg"
         /></a>
         <img
           class="d-m-n"

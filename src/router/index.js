@@ -17,7 +17,11 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/TodolistView.vue'),
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('../views/NotFoundView.vue'),
+    },
   ],
 })
-
 export default router

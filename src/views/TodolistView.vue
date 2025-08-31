@@ -17,7 +17,9 @@ const tempTodo = ref('')
 onMounted(async () => {
   try {
     await fetchUserData()
-    await getTodos()
+    if (token.value) {
+      await getTodos()
+    }
   } catch (error) {
     alert(`${error.response.data.message}`)
   }
@@ -35,7 +37,6 @@ const fetchUserData = async () => {
       })
       user.value.nickname = res.data.nickname
       user.value.uid = res.data.uid
-      await getTodos()
     } else {
       router.push('/')
     }
@@ -83,8 +84,8 @@ const addTodo = async () => {
       },
     )
     tempTodo.value = ''
-    await getTodos()
     alert(`${res.data.newTodo.content} 新增待辦成功`)
+    await getTodos()
   } catch (error) {
     alert(`${error.response.data.message}`)
   }
@@ -158,7 +159,7 @@ const deleteTodo = async (id) => {
       },
     })
     alert(res.data.message)
-    await fetchUserData()
+    await getTodos()
   } catch (error) {
     alert(`${error.response.data.message}`)
   }
