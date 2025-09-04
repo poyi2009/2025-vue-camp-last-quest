@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 
@@ -11,6 +11,10 @@ const token = ref('')
 const errors = ref({
   email: '',
   password: '',
+})
+//確認form欄位皆有值 且無錯誤訊息
+const isFormValid = computed(() => {
+  return email.value && password.value && !errors.value.email && !errors.value.password
 })
 
 const emit = defineEmits(['change-home-status'])
@@ -43,7 +47,11 @@ const signin = async () => {
       password: password.value,
     })
     token.value = res.data.token
-    document.cookie = `customTodoToken=${res.data.token};path=;`
+    const date = new Date()
+    // 設定過期時間：當前時間 + 1 天
+    // date.setTime(date.getTime() + 24 * 60 * 60 * 1000)
+    date.setTime(date.getTime() + 60 * 1000)
+    document.cookie = `customTodoToken=${res.data.token};expires=${date.toUTCString()};path=;`
     alert(`登入成功`)
     router.push('/mylist')
   } catch (error) {
@@ -78,7 +86,13 @@ const signin = async () => {
         v-model="password"
       />
       <span v-if="errors.password">{{ errors.password }}</span>
-      <input class="formControls_btnSubmit" type="button" value="登入" @click="signin" />
+      <input
+        class="formControls_btnSubmit"
+        type="button"
+        value="登入"
+        @click="signin"
+        :disabled="!isFormValid"
+      />
       <a href="" @click.prevent="changeHomeStatus" class="formControls_btnLink">註冊帳號</a>
     </form>
   </div>

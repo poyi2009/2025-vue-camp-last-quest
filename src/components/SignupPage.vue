@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import axios from 'axios'
 
 const apiUrl = 'https://todolist-api.hexschool.io'
@@ -69,6 +69,19 @@ const signup = async () => {
     alert(`註冊失敗: ${error.response.data.message}`)
   }
 }
+//確認form欄位皆有值 且無錯誤訊息
+const isFormValid = computed(() => {
+  return (
+    email.value &&
+    nickname.value &&
+    password.value &&
+    comparePassword.value &&
+    !errors.value.email &&
+    !errors.value.nickname &&
+    !errors.value.password &&
+    !errors.value.comparePassword
+  )
+})
 </script>
 <template>
   <div>
@@ -119,7 +132,13 @@ const signup = async () => {
         v-model="comparePassword"
       />
       <span v-if="errors.comparePassword">{{ errors.comparePassword }}</span>
-      <input class="formControls_btnSubmit" type="button" value="註冊帳號" @click="signup" />
+      <input
+        class="formControls_btnSubmit"
+        type="button"
+        value="註冊帳號"
+        @click="signup"
+        :disabled="!isFormValid"
+      />
       <a href="" @click.prevent="changeHomeStatus" class="formControls_btnLink">登入</a>
     </form>
   </div>

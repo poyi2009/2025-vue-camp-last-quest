@@ -64,7 +64,7 @@ const signout = async () => {
     document.cookie = `customTodoToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=;`
     token.value = null
     alert(`${res.data.message}`)
-    await fetchUserData()
+    router.replace('/')
   } catch (error) {
     alert(`登出失敗: ${error.response.data.message}`)
   }
@@ -72,6 +72,10 @@ const signout = async () => {
 //新增todo
 const addTodo = async () => {
   try {
+    if (!tempTodo.value.trim()) {
+      alert('新增事項不可為空')
+      return
+    }
     const res = await axios.post(
       `${apiUrl}/todos/`,
       {
@@ -186,7 +190,7 @@ const filterList = computed(() => {
             ><span>{{ user.nickname }}的代辦</span></a
           >
         </li>
-        <li><a href="#" @click="signout">登出</a></li>
+        <li><a href="#" @click.prevent="signout">登出</a></li>
       </ul>
     </nav>
     <div class="conatiner todoListPage vhContainer">
